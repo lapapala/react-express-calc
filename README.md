@@ -1,6 +1,6 @@
 Firstly open api folder in client directory and run Express server by typing npm start in Terminal
 
-After go to the client directory and do same
+After go to the main directory and do same!
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
