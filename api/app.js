@@ -10,7 +10,7 @@ var testAPIRouter = require("./routes/testAPI");
 
 var express = require("express");
 var app = express();
-var PORT = 8080;
+var PORT = process.env.PORT || 8080;
 
 
 app.get("/", function(req, res){
@@ -27,13 +27,12 @@ app.listen(PORT, function(){
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-app.use(cors());
+app.use("*",cors()) 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
 
 app.get('/:operator/:num1/:num2', function(req,res){
 	console.log(req, res)
@@ -81,6 +80,13 @@ app.get('/:operator/:num1/:num2', function(req,res){
 
 	res.json(result);
 });
+
+app.post('/expression', (req, res) => {
+	let {expression} = req.body
+	let result = JSON.parse(expression)
+	console.log(result, expression)
+	res.json(result)
+})
 //app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use("/testAPI", testAPIRouter);
